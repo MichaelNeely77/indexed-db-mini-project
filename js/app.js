@@ -7,8 +7,8 @@ const form = document.querySelector('form'),
     date = document.querySelector('#date'),
     hour = document.querySelector('#hour'),
     symptoms = document.querySelector('#symptoms'),
-    apppointements = document.querySelector('#appointments'),
-    appintmentTitle  = document.querySelector('#appointment-title');
+    appointments = document.querySelector('#appointments'),
+    appointmentTitle  = document.querySelector('#appointment-title');
 
 document.addEventListener('DOMContentLoaded', () => {
     // create the database
@@ -37,8 +37,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // create index )1) field name 2) keypath 3) options
         objectStore.createIndex('petname', 'petname', { unique: false} );
+        objectStore.createIndex('ownername', 'ownername', { unique: false} );
+        objectStore.createIndex('phone', 'phone', { unique: false} );
+        objectStore.createIndex('date', 'date', { unique: false} );
+        objectStore.createIndex('hour', 'hour', { unique: false} );
+        objectStore.createIndex('symptoms', 'symptoms', { unique: false} );
+
+
 
         console.log("Database ready and fields created");
 
     }
+
+    form.addEventListener('submit', addAppointment);
+
+    function addAppointment(e) {
+        e.preventDefault();
+
+        // create a new object
+        let newAppointment = {
+            petname : petName.value,
+            ownername : ownerName.value,
+            phone : phone.value,
+            date : date.value,
+            hour : hour.value,
+            symptoms : symptoms.value
+        }
+
+        console.log(newAppointment);
+    }
 });
+
