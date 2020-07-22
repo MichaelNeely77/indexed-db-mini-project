@@ -64,7 +64,27 @@ document.addEventListener('DOMContentLoaded', () => {
             symptoms : symptoms.value
         }
 
-        console.log(newAppointment);
+        // Insert the oblect to the DB
+        let transaction = DB.transaction(['appointments'], 'readwrite');
+        let objectStore = transaction.objectStore('appointments');
+
+        console.log(objectStore);
+
+        let request = objectStore.add(newAppointment);
+
+        console.log(request);
+
+        request.onsuccess = () => {
+            form.reset();
+        }
+
+        transaction.oncomplete = () => {
+            console.log('New Appointment added');
+        }
+
+        transaction.onerror = () => {
+            console.log('There was an error, try again');
+        }
     }
 });
 
