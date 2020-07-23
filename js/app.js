@@ -114,11 +114,47 @@ document.addEventListener('DOMContentLoaded', () => {
                         ${cursor.value.petname}
                         </span>
                     </p>
-                `;
+                    <p class="font-weight-bold">Owner Name: 
+                    <span class="font-weight-normal">
+                    ${cursor.value.ownername}
+                    </span>
+                    </p>
+                    <p class="font-weight-bold">Phone: 
+                    <span class="font-weight-normal">
+                    ${cursor.value.phone}
+                    </span>
+                    </p>
+                    <p class="font-weight-bold">Date: 
+                    <span class="font-weight-normal">
+                    ${cursor.value.date}
+                    </span>
+                    </p>
+                    <p class="font-weight-bold">Timee: 
+                    <span class="font-weight-normal">
+                    ${cursor.value.hour}
+                    </span>
+                    </p>
+                    <p class="font-weight-bold">Symptoms: 
+                    <span class="font-weight-normal">
+                    ${cursor.value.symptoms}
+                    </span>
+                    </p>
+                    `;
 
                 appointments.appendChild(appointmentHTML);
 
                 cursor.continue();
+            } else {
+                if(!appointments.firstChild) {
+                    appointmentTitle.textContent = 'Add a New Appointment';
+                    noAppointment = document.createElement('p');
+                    noAppointment.classList.add('text-center');
+                    noAppointment.textContent = 'No results found';
+                    appointments.appendChild(noAppointment);
+                } else {
+                    appointmentTitle.textContent = 'Manage Your Appointments';
+
+                }
             }
         }
     }
