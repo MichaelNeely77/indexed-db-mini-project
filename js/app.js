@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if(cursor) {
                 let appointmentHTML = document.createElement('li');
-                appointmentHTML.setAttribute('data-apointment-id', cursor.value.key);
+                appointmentHTML.setAttribute('data-appointment-id', cursor.value.key);
                 appointmentHTML.classList.add('list-group-item');
 
                 appointmentHTML.innerHTML = `
@@ -139,8 +139,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     ${cursor.value.symptoms}
                     </span>
                     </p>
+
                     `;
 
+                    // Remove button
+                    const removeBTN = document.createElement('button');
+                    removeBTN.classList.add('btn', 'btn-danger');
+                    removeBTN.innerHTML = '<span aria-hidden="true">X Remove</span>';
+                    removeBTN.onclick = removeAppointment;
+
+                appointmentHTML.appendChild(removeBTN);
                 appointments.appendChild(appointmentHTML);
 
                 cursor.continue();
@@ -157,6 +165,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }
+    }
+
+    function removeAppointment(e) {
+        let appointmentID = Number(e.target.parentElement.getAttribute('data-appointment-id'));
+
+        
     }
 });
 
